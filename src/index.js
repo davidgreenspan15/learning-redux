@@ -6,8 +6,15 @@ import * as serviceWorker from './serviceWorker';
 
 import {createStore} from 'redux'
 
-function reducer (){
-  return {}
+const defaultState ={
+  likes: 0,
+  text: "",
+  darkMode: false,
+  thangs: []
+}
+
+function reducer (prevState=defaultState, action){
+  return prevState
 }
 
 
