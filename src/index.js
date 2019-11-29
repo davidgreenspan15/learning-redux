@@ -14,12 +14,15 @@ const defaultState ={
 }
 
 function reducer (prevState=defaultState, action){
-  return prevState
+  switch(action.type){
+    case "LIKE":
+      return {...prevState, likes: prevState.likes + 1}
 }
 
 
 const store = createStore(reducer)
 
+store.dispatch({Type: "LIKE"})
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
