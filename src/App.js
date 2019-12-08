@@ -41,7 +41,7 @@ class App extends React.Component {
           onChange={(e) => this.dispatch("HANDLE_CHANGE", e.target.value)}/>
         <button onClick={() => this.dispatch("PRINT")}>Add!</button>
 
-        <h4>{this.state.likes} likes</h4>
+        <h4>{this.props.likes} likes</h4>
         <button onClick={() => this.dispatch("LIKE")}>
           Like<span role="img" aria-label="thumbs up">👍</span>
         </button>
@@ -56,4 +56,13 @@ class App extends React.Component {
   }
 }
 
-export default connect()(App);
+function mapStatetoProps(state){
+  return {
+    likes: state.likes,
+    darkMode: state.darkMode,
+    text: state.text,
+    thangs: state.thangs
+  }
+}
+
+export default connect()(App) ;
