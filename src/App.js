@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import {connect} 'react-redux'
 class App extends React.Component {
 
   state = {
@@ -56,4 +56,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
