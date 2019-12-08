@@ -34,10 +34,10 @@ class App extends React.Component {
 
 function mapStateToProps(state){
   return {
-    likes: state.likes,
-    darkMode: state.darkMode,
-    text: state.text,
-    thangs: state.thangs
+    likes: state.key.likes,
+    darkMode: state.key.darkMode,
+    text: state.key.text,
+    thangs: state.key.thangs
   }
 }
 
