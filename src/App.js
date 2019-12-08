@@ -1,62 +1,38 @@
 import React from 'react';
 import './App.css';
-import {connect} 'react-redux'
+import {connect} from 'react-redux'
 class App extends React.Component {
 
-  state = {
-    likes: 0,
-    text: "",
-    darkMode: false,
-    thangs: []
-  }
 
-  dispatch = (type, payload) => {
-    const newState = this.reducer(type, payload)
-    this.setState(newState)
-  }
 
-  reducer = (type, payload) => {
-    switch(type){
-      case "LIKE":
-        return {...this.state, likes: this.state.likes + 1}
-      case "DISLIKE":
-        return {...this.state, likes: this.state.likes - 1}
-      case "DARK_MODE":
-        return {...this.state, darkMode: !this.state.darkMode}
-      case "HANDLE_CHANGE":
-        return {...this.state, text: payload}
-      case "PRINT":
-        return {...this.state, text: "", thangs: [...this.state.thangs, this.state.text]}
-    }
-  }
 
   render(){
     return (
-      <div className={"App" + (this.state.darkMode ? " dark" : "")}>
-        <button onClick={() => this.dispatch("DARK_MODE")}>Dark mode</button>
-        <h3>{this.state.text}</h3>
+      <div className={"App" + (this.props.darkMode ? " dark" : "")}>
+        <button onClick={this.props.toggleDark}>Dark mode</button>
+        <h3>{this.props.text}</h3>
         <input
           name="text"
-          value={this.state.text}
-          onChange={(e) => this.dispatch("HANDLE_CHANGE", e.target.value)}/>
-        <button onClick={() => this.dispatch("PRINT")}>Add!</button>
+          value={this.props.text}
+          onChange={(e) => this.props.handleChange(e.target.value)}/>
+        <button onClick={this.props.print}>Add!</button>
 
         <h4>{this.props.likes} likes</h4>
-        <button onClick={() => this.dispatch("LIKE")}>
+        <button onClick={this.props.like}>
           Like<span role="img" aria-label="thumbs up">👍</span>
         </button>
-        <button onClick={() => this.dispatch("DISLIKE")}>
+        <button onClick={this.props.dislike}>
           Dislike <span role="img" aria-label="thumbs down">👎</span>
         </button>
         {
-          this.state.thangs.map(thang => <h1>{thang}</h1>)
+          this.props.thangs.map(thang => <h1>{thang}</h1>)
         }
       </div>
     );
   }
 }
 
-function mapStatetoProps(state){
+function mapStateToProps(state){
   return {
     likes: state.likes,
     darkMode: state.darkMode,
@@ -65,4 +41,25 @@ function mapStatetoProps(state){
   }
 }
 
-export default connect()(App) ;
+function mapDispatchToProps(dispatch){
+  return{
+    like: ()=>{
+      dispatch({type: "LIKE"})
+    },
+    dislike: ()=>{
+      dispatch({type: "DISLIKE"})
+    },
+    toggleDark: ()=>{
+      dispatch({type: "DARK_MODE"})
+    },
+    handleChange: (text)=>{
+      dispatch({type: "HANDLE_CHANGE", payload: text})
+    },
+    print: ()=>{
+      dispatch({type: "PRINT"})
+    }
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App) ;

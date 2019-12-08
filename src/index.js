@@ -11,7 +11,6 @@ import {createStore} from 'redux'
 
 const store = createStore(reducer)
 
-store.dispatch({type: "HANDLE_CHANGE", payload: "Hello World!"})
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
