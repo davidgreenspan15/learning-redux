@@ -7,7 +7,7 @@ import reducer from './reducer.js'
 import {Provider} from 'react-redux'
 
 
-import {createStore} from 'redux'
+import {createStore, combineReducers} from 'redux'
 
 const store = createStore(reducer)
 
