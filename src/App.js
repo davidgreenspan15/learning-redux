@@ -4,13 +4,21 @@ import {connect} from 'react-redux'
 import {like, dislike, toggleDark, handleChange, hold} from './action.js'
 class App extends React.Component {
 
-
+  state = {
+      pokeID: 1
+    }
 
   componentDidMount(){
-    fetch(`https://pokeapi.co/api/v2/pokemon/1`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${this.state.pokeID}`)
    .then(res => res.json())
    .then(data => this.props.hold(data.sprites.front_default))
   }
+
+  next = () => {
+     this.setState({
+       pokeID: this.state.pokeID + 1 
+     }, () => this.props.choosePokemon(this.state.pokeID))
+   }
 
   render(){
     return (
