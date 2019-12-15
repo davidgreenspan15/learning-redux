@@ -42,25 +42,13 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return{
-    like: ()=>{
-      dispatch(like())
-    },
-    dislike: ()=>{
-      dispatch(dislike())
-    },
-    toggleDark: ()=>{
-      dispatch(toggleDark())
-    },
-    handleChange: (text)=>{
-      dispatch(handleChange(text))
-    },
-    print: ()=>{
-      dispatch({type: "PRINT"})
-    }
-  }
-}
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(App) ;
+
+export default connect(mapStateToProps,
+  {
+    like,
+    dislike,
+    toggleDark,
+    handleChange
+  })(App) ;
