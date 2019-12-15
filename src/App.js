@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux'
+import {like, dislike, toggleDark, handleChange} from './action.js'
 class App extends React.Component {
 
 
@@ -44,16 +45,16 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return{
     like: ()=>{
-      dispatch({type: "LIKE"})
+      dispatch(like())
     },
     dislike: ()=>{
-      dispatch({type: "DISLIKE"})
+      dispatch(dislike())
     },
     toggleDark: ()=>{
-      dispatch({type: "DARK_MODE"})
+      dispatch(toggleDark())
     },
     handleChange: (text)=>{
-      dispatch({type: "HANDLE_CHANGE", payload: text})
+      dispatch(handleChange(text))
     },
     print: ()=>{
       dispatch({type: "PRINT"})
