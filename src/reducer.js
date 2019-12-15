@@ -2,7 +2,8 @@ const defaultState ={
   likes: 0,
   text: "",
   darkMode: false,
-  thangs: []
+  thangs: [],
+  pokimon: ""
 }
 
 function reducer (prevState=defaultState, action){
@@ -23,6 +24,10 @@ function reducer (prevState=defaultState, action){
         thangs: prevState.thangs.filter(thang => {
           return thang !== action.payload
         })}
+      case "HOLD_POKIMON";
+        return {
+          ...prevtstae, pokimon: action.payload
+        }
     default:
       return prevState
   }

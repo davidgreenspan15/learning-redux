@@ -14,10 +14,15 @@ function handleChange(text){
   return {type: "HANDLE_CHANGE", payload: text}
 }
 
+function hold(url){
+  return {type: "HOLD_POKIMON", payload: url}
+}
+
 
 export {
   like,
   dislike,
   toggleDark,
-  handleChange
+  handleChange,
+  hold
 }

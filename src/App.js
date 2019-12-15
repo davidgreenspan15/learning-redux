@@ -1,16 +1,22 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux'
-import {like, dislike, toggleDark, handleChange} from './action.js'
+import {like, dislike, toggleDark, handleChange, hold} from './action.js'
 class App extends React.Component {
 
 
 
+  componentDidMount(){
+    fetch(`https://pokeapi.co/api/v2/pokemon/1`)
+   .then(res => res.json())
+   .then(data => this.props.hold(data.sprites.front_default))
+  }
 
   render(){
     return (
       <div className={"App" + (this.props.darkMode ? " dark" : "")}>
         <button onClick={this.props.toggleDark}>Dark mode</button>
+        <img src={this.props.pokimon}/>
         <h3>{this.props.text}</h3>
         <input
           name="text"
@@ -39,6 +45,7 @@ function mapStateToProps(state){
     darkMode: state.key.darkMode,
     text: state.key.text,
     thangs: state.key.thangs
+    pokimon: state.key.pokimon
   }
 }
 
@@ -50,5 +57,6 @@ export default connect(mapStateToProps,
     like,
     dislike,
     toggleDark,
-    handleChange
+    handleChange,
+    hold
   })(App) ;
